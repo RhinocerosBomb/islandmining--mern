@@ -29,8 +29,6 @@ const PublicRoutes = ({history, isLoggedIn}) => {
     <Router history={history}>
       <div>
         <Header/>
-        <hr/>
-        <br/>
         <Body>
         <Switch>
           <Route
@@ -55,8 +53,6 @@ const PublicRoutes = ({history, isLoggedIn}) => {
           />
         </Switch>
         </Body>
-        <hr/>
-        <br/>
         <Footer/>
       </div>
     </Router>

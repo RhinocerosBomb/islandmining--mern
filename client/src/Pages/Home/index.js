@@ -1,4 +1,25 @@
+import '../../assets/vendors/liquid-icon/liquid-icon.min.css';
+import '../../assets/vendors/font-awesome/css/font-awesome.min.css';
+import '../../assets/theme-vendors.min.css';
+import '../../assets/vendors/theme.min.css';
+import '../../assets/vendors/themes/seo.css';
 import './home.css';
+import im_logo_mail_sm from '../../assets/media/im_logo_mail_sm.png';
+import whitepaper_2nd from '../../assets/media/whitepaper-2nd.jpg';
+import falcon_4000 from '../../assets/media/falcon-4000.png';
+import arakawa_sq from '../../assets/media/Arakawa-SQ.jpg';
+import case_sq from '../../assets/media/Case-SQ.jpg';
+import chrismarsh_sq from '../../assets/media/ChrisMarsh-SQ.jpg';
+import christopher_sq from '../../assets/media/Christopher-SQ.jpg';
+import logo_sq from '../../assets/media/logo_sq.png';
+import naoki_singer_sq from '../../assets/media/NaokoSinger-SQ.jpg';
+import neil_sl from '../../assets/media/Neil-SQ.jpg';
+import samir_sq from '../../assets/media/Samir-SQ.jpg';
+import self_hosted_video_demo from '../../assets/media/self-hosted-video-demo.jpg';
+import sergelen_sq from '../../assets/media/Sergelen-SQ.jpg';
+import whitepaper_sct from '../../assets/media/whitepaper-sct.jpg';
+import bg_75 from '../../assets/demo/bg/bg-75.svg';
+
 import React, {Component} from 'react';
 
 export default class extends Component {
@@ -17,13 +38,13 @@ export default class extends Component {
                       <div className="navbar-header">
                         <a className="navbar-brand" href="/" rel="home">
 										<span className="navbar-brand-inner">
-											<img style={{width: "300px"}} className="logo-dark" src="./assets/media/im_logo_mail_sm.png"
+											<img style={{width: "300px"}} className="logo-dark" src={im_logo_mail_sm}
                            alt="Island Mining"/>
-											<img style={{width: "300px"}} className="logo-sticky" src="./assets/media/im_logo_mail_sm.png"
+											<img style={{width: "300px"}} className="logo-sticky" src={im_logo_mail_sm}
                            alt="Island Mining"/>
-											<img style={{width: "300px"}} className="mobile-logo-default" src="./assets/media/im_logo_mail_sm.png"
+											<img style={{width: "300px"}} className="mobile-logo-default" src={im_logo_mail_sm}
                            alt="Island Mining"/>
-											<img style={{width: "300px"}} className="logo-default" src="./assets/media/im_logo_mail_sm.png"
+											<img style={{width: "300px"}} className="logo-default" src={im_logo_mail_sm}
                            alt="Island Mining"/>
 										</span>
                         </a>
@@ -117,7 +138,7 @@ export default class extends Component {
           </header>
           <main id="content" className="content">
             <section className="vc_row bg-no-repeat fullheight d-flex align-items-center py-5"
-                     style={{backgroundImage: "url(./assets/demo/bg/bg-75.svg)", backgroundPosition: "170% 110%"}}>
+                     style={{backgroundImage: `url(${bg_75})`, backgroundPosition: "170% 110%"}}>
               <div className="lqd-particles-bg-wrap">
                 <div className="ld-particles-container">
                   <div className="ld-particles-inner" id="particles-1559739661542-e9d04c39-a9eb" data-particles="true"
@@ -399,8 +420,7 @@ export default class extends Component {
                                  data-parallax-to="{&quot;translateY&quot;:71,&quot;translateX&quot;:-40}"
                                  data-parallax-options="{&quot;overflowHidden&quot;:false, &quot;easing&quot;:&quot;linear&quot;}">
                               <figure>
-                                <a href="https://docsend.com/view/y87qbwm"><img src="./assets/media/whitepaper-2nd.jpg"
-                                                                                alt="Working with Ave"/></a>
+                                <a href="https://docsend.com/view/y87qbwm"><img src={whitepaper_2nd} alt="Working with Ave"/></a>
                               </figure>
                             </div>
                           </div>
@@ -413,7 +433,7 @@ export default class extends Component {
                                  data-parallax-to="{&quot;translateY&quot;:-134}"
                                  data-parallax-options="{&quot;overflowHidden&quot;:false,&quot;easing&quot;:&quot;linear&quot;}">
                               <figure>
-                                <a href="https://docsend.com/view/y87qbwm"><img src="./assets/media/whitepaper-sct.jpg"
+                                <a href="https://docsend.com/view/y87qbwm"><img src={whitepaper_sct}
                                                                                 alt="Working with Ave"/></a>
                               </figure>
                             </div>
@@ -665,7 +685,7 @@ export default class extends Component {
 
                 <div className="row d-flex flex-wrap align-items-center">
                   <a href="" className="col-md-5 col-sm-12">
-                    <img src="./assets/media/falcon-4000.png" alt=""/>
+                    <img src={falcon_4000} alt=""/>
                   </a>
                   <div data-custom-animations="true"
                        data-ca-options="{&quot;triggerHandler&quot;:&quot;inview&quot;, &quot;animationTarget&quot;:&quot;all-childs&quot;, &quot;duration&quot;:&quot;1600&quot;, &quot;delay&quot;:&quot;160&quot;, &quot;easing&quot;:&quot;easeOutQuint&quot;, &quot;direction&quot;:&quot;forward&quot;, &quot;initValues&quot;:{&quot;translateY&quot;:30, &quot;opacity&quot;:0}, &quot;animations&quot;:{&quot;translateY&quot;:0, &quot;opacity&quot;:1}}"
@@ -987,7 +1007,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="/assets/media/Christopher-SQ.jpg" alt="Christopher Filiatrault"/>
+                      <img className="square" src={christopher_sq} alt="Christopher Filiatrault"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1009,7 +1029,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/Arakawa-SQ.png" alt="Muneya Arakawa"/>
+                      <img className="square" src={arakawa_sq} alt="Muneya Arakawa"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1029,7 +1049,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/ChrisMarsh-SQ.png" alt="Chris Marsh"/>
+                      <img className="square" src={chrismarsh_sq} alt="Chris Marsh"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1049,7 +1069,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/Case-SQ.png" alt="Case Lewis"/>
+                      <img className="square" src={case_sq} alt="Case Lewis"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1069,7 +1089,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/NaokoSinger-SQ.png" alt="Naoko Singer"/>
+                      <img className="square" src={naoki_singer_sq} alt="Naoko Singer"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1090,7 +1110,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/Samir-SQ.png" alt="Samir Bandali"/>
+                      <img className="square" src={samir_sq} alt="Samir Bandali"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1113,7 +1133,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/Sergelen-SQ.png" alt="Sergelen Tsogtbayar"/>
+                      <img className="square" src={sergelen_sq} alt="Sergelen Tsogtbayar"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1132,7 +1152,7 @@ export default class extends Component {
                 <div className="ld-tm d-flex flex-column text-center px-md-3">
                   <div className="ld-tm-img mb-3 text-center">
                     <figure>
-                      <img className="square" src="./assets/media/Neil-SQ.png" alt="Neil Wright"/>
+                      <img className="square" src={neil_sl} alt="Neil Wright"/>
                     </figure>
                   </div>
                   <div className="ld-tm-info">
@@ -1158,7 +1178,7 @@ export default class extends Component {
               <div className="lqd-column col-md-3 col-sm-6">
                 <div className="d-flex justify-content-center flex-column">
                   <figure className="text-center mb-4">
-                    <img src="./assets/media/logo_sq.png" alt="Virtus"/>
+                    <img src={logo_sq} alt="Virtus"/>
                   </figure>
                   <ul className="social-icon social-icon-lg d-flex justify-content-center">
                     <li><a href="#" target="_blank"><i className="fa fa-facebook"></i></a></li>

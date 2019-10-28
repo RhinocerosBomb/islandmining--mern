@@ -45,35 +45,35 @@ class Header extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Link to='/' className={classes.link}>
-                <Button color="inherit">Island Mining</Button>
-              </Link>
-              <Link to='/items' className={classes.link}>
-                <Button color="inherit">Items</Button>
-              </Link>
-            </Typography>
-            {
-              !this.props.currentUser ? (
-                <span>
-                  <Link to='/login' className={classes.link}>
-                    <Button color="inherit">Login</Button>
-                  </Link>
-                  <Link to='/signup' className={classes.link}>
-                    <Button color="inherit">Sign Up</Button>
-                  </Link>
-                </span>
-              ) : (
-                <span>
-                  <span>{this.props.currentUser ? this.props.currentUser.email : ""}</span>
-                  <Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>
-                </span>
-              )
-            }
-          </Toolbar>
-        </AppBar>
+        {/*<AppBar position="static">*/}
+          {/*<Toolbar>*/}
+            {/*<Typography variant="h6" color="inherit" className={classes.grow}>*/}
+              {/*<Link to='/' className={classes.link}>*/}
+                {/*<Button color="inherit">Island Mining</Button>*/}
+              {/*</Link>*/}
+              {/*<Link to='/items' className={classes.link}>*/}
+                {/*<Button color="inherit">Items</Button>*/}
+              {/*</Link>*/}
+            {/*</Typography>*/}
+            {/*{*/}
+              {/*!this.props.currentUser ? (*/}
+                {/*<span>*/}
+                  {/*<Link to='/login' className={classes.link}>*/}
+                    {/*<Button color="inherit">Login</Button>*/}
+                  {/*</Link>*/}
+                  {/*<Link to='/signup' className={classes.link}>*/}
+                    {/*<Button color="inherit">Sign Up</Button>*/}
+                  {/*</Link>*/}
+                {/*</span>*/}
+              {/*) : (*/}
+                {/*<span>*/}
+                  {/*<span>{this.props.currentUser ? this.props.currentUser.email : ""}</span>*/}
+                  {/*<Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>*/}
+                {/*</span>*/}
+              {/*)*/}
+            {/*}*/}
+          {/*</Toolbar>*/}
+        {/*</AppBar>*/}
       </div>
     )
   }
