@@ -105,16 +105,6 @@ export default class extends Component {
                               <span className="txt">Team</span>
                             </a>
                           </li>
-                          <li className="desktop-hidden">
-                            <a href="/login" data-localscroll="true">
-                              <span className="txt">Log In</span>
-                            </a>
-                          </li>
-                          <li className="desktop-hidden">
-                            <a href="/register" data-localscroll="true">
-                              <span className="txt">Sign Up</span>
-                            </a>
-                          </li>
                         </ul>
                       </div>
                     </div>

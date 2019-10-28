@@ -47,8 +47,8 @@ const PublicRoutes = ({history, isLoggedIn}) => {
             component={asyncComponent(() => import("./Pages/Login"))}
           />
           <RestrictedRoute
-            path="/items"
-            component={asyncComponent(() => import("./Pages/Items"))}
+            path="/dashboard"
+            component={asyncComponent(() => import("./Pages/Dashboard"))}
             isLoggedIn={isLoggedIn}
           />
         </Switch>
