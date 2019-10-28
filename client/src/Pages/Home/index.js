@@ -19,7 +19,7 @@ import self_hosted_video_demo from '../../assets/media/self-hosted-video-demo.jp
 import sergelen_sq from '../../assets/media/Sergelen-SQ.jpg';
 import whitepaper_sct from '../../assets/media/whitepaper-sct.jpg';
 import bg_75 from '../../assets/demo/bg/bg-75.svg';
-
+import {Link} from 'react-router-dom'
 import React, {Component} from 'react';
 
 export default class extends Component {
@@ -110,17 +110,33 @@ export default class extends Component {
                     </div>
                     <div className="col text-right">
                       <div className="header-module">
-
-                        <a href="/dashboard"
-                           className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
-											<span>
-												<span className="btn-txt">Logged in as aaa@gmail.com</span>
-											</span>
-                        </a>
+                        <Link to="/login" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
+                          <span>
+                            <span className="btn-txt">Log In</span>
+                          </span>
+                        </Link>
                       </div>
                       <div className="header-module">
+                        <Link to="/register" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
+                          <span>
+                            <span className="btn-txt">Sign Up</span>
+                          </span>
+                        </Link>
                       </div>
                     </div>
+                    {/*<div className="col text-right">*/}
+                      {/*<div className="header-module">*/}
+
+                        {/*<a href="/dashboard"*/}
+                           {/*className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">*/}
+											{/*<span>*/}
+												{/*<span className="btn-txt">Logged in as aaa@gmail.com</span>*/}
+											{/*</span>*/}
+                        {/*</a>*/}
+                      {/*</div>*/}
+                      {/*<div className="header-module">*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
                   </div>
                 </div>
               </div>
@@ -277,13 +293,13 @@ export default class extends Component {
 										<svg xmlns="http://www.w3.org/2000/svg"  width="80"
                          height="80.16" viewBox="0 0 80 80.16"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                       gradientUnits="userSpaceOnUse" id="grad946249" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%"
-                                                                                                             stop-color="#f42958"/><stop
-                      offset="100%" stop-color="#f42958"/></linearGradient></defs>
+                                                                                                             stopColor="#f42958"/><stop
+                      offset="100%" stopColor="#f42958"/></linearGradient></defs>
 											<defs xmlns="http://www.w3.org/2000/svg">
 												<linearGradient gradientUnits="userSpaceOnUse" id="grad231243" x1="0%" y1="0%" x2="0%"
                                         y2="100%">
-													<stop offset="0%" stop-color="#f42958"/>
-													<stop offset="100%" stop-color="#f42958"/>
+													<stop offset="0%" stopColor="#f42958"/>
+													<stop offset="100%" stopColor="#f42958"/>
 												</linearGradient>
 											</defs>
 											<defs>
@@ -320,13 +336,13 @@ export default class extends Component {
 										<svg xmlns="http://www.w3.org/2000/svg"  width="79.5"
                          height="70.625" viewBox="0 0 79.5 70.625"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                       gradientUnits="userSpaceOnUse" id="grad787375" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%"
-                                                                                                             stop-color="#f42958"/><stop
-                      offset="100%" stop-color="#f42958"/></linearGradient></defs>
+                                                                                                             stopColor="#f42958"/><stop
+                      offset="100%" stopColor="#f42958"/></linearGradient></defs>
 											<defs xmlns="http://www.w3.org/2000/svg">
 												<linearGradient gradientUnits="userSpaceOnUse" id="grad797996" x1="0%" y1="0%" x2="0%"
                                         y2="100%">
-													<stop offset="0%" stop-color="#f42958"/>
-													<stop offset="100%" stop-color="#f42958"/>
+													<stop offset="0%" stopColor="#f42958"/>
+													<stop offset="100%" stopColor="#f42958"/>
 												</linearGradient>
 											</defs>
 											<defs>
@@ -362,12 +378,12 @@ export default class extends Component {
 										<svg xmlns="http://www.w3.org/2000/svg"  width="70.625"
                          height="70.781" viewBox="0 0 70.625 70.781"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                       gradientUnits="userSpaceOnUse" id="grad85364" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%"
-                                                                                                            stop-color="#f42958"/><stop
-                      offset="100%" stop-color="#f42958"/></linearGradient></defs>
+                                                                                                            stopColor="#f42958"/><stop
+                      offset="100%" stopColor="#f42958"/></linearGradient></defs>
 											<defs xmlns="http://www.w3.org/2000/svg">
 												<linearGradient gradientUnits="userSpaceOnUse" id="grad51784" x1="0%" y1="0%" x2="0%" y2="100%">
-													<stop offset="0%" stop-color="#f42958"/>
-													<stop offset="100%" stop-color="#f42958"/>
+													<stop offset="0%" stopColor="#f42958"/>
+													<stop offset="100%" stopColor="#f42958"/>
 												</linearGradient>
 											</defs>
 											<defs>
@@ -535,8 +551,8 @@ export default class extends Component {
 											<svg xmlns="http://www.w3.org/2000/svg"  width="42.375"
                            height="45.188" viewBox="0 0 42.375 45.188"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                         gradientUnits="userSpaceOnUse" id="grad909202" x1="0%" y1="0%" x2="0%" y2="100%"><stop
-                        offset="0%" stop-color="#f42958"/><stop offset="100%"
-                                                                      stop-color="#f42958"/></linearGradient></defs>
+                        offset="0%" stopColor="#f42958"/><stop offset="100%"
+                                                                      stopColor="#f42958"/></linearGradient></defs>
 												<defs>
 													<filter id="filter-seo-icon-4" x="0.813" y="0" width="42.375" height="45.188"
                                   filterUnits="userSpaceOnUse">
@@ -567,8 +583,8 @@ export default class extends Component {
 											<svg xmlns="http://www.w3.org/2000/svg"  width="48"
                            height="42.375" viewBox="0 0 48 42.375"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                         gradientUnits="userSpaceOnUse" id="grad179776" x1="0%" y1="0%" x2="0%" y2="100%"><stop
-                        offset="0%" stop-color="#f42958"/><stop offset="100%"
-                                                                      stop-color="#f42958"/></linearGradient></defs>
+                        offset="0%" stopColor="#f42958"/><stop offset="100%"
+                                                                      stopColor="#f42958"/></linearGradient></defs>
 												<defs>
 													<filter id="filter-seo-icon-6" x="0" y="0.813" width="48" height="42.375"
                                   filterUnits="userSpaceOnUse">
@@ -608,8 +624,8 @@ export default class extends Component {
 											<svg xmlns="http://www.w3.org/2000/svg"  width="31.219"
                            height="48" viewBox="0 0 31.219 48"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                         gradientUnits="userSpaceOnUse" id="grad249375" x1="0%" y1="0%" x2="0%" y2="100%"><stop
-                        offset="0%" stop-color="#f42958"/><stop offset="100%"
-                                                                      stop-color="#f42958"/></linearGradient></defs>
+                        offset="0%" stopColor="#f42958"/><stop offset="100%"
+                                                                      stopColor="#f42958"/></linearGradient></defs>
 												<defs>
 													<filter id="filter-seo-icon-5" x="0.344" y="0" width="31.219" height="48"
                                   filterUnits="userSpaceOnUse">
@@ -640,8 +656,8 @@ export default class extends Component {
 											<svg xmlns="http://www.w3.org/2000/svg"  width="48"
                            height="36.75" viewBox="0 0 48 36.75"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient
                         gradientUnits="userSpaceOnUse" id="grad877332" x1="0%" y1="0%" x2="0%" y2="100%"><stop
-                        offset="0%" stop-color="#f42958"/><stop offset="100%"
-                                                                      stop-color="#f42958"/></linearGradient></defs>
+                        offset="0%" stopColor="#f42958"/><stop offset="100%"
+                                                                      stopColor="#f42958"/></linearGradient></defs>
 												<defs>
 													<filter id="filter-seo-icon-7" x="0" y="0.625" width="48" height="36.75"
                                   filterUnits="userSpaceOnUse">

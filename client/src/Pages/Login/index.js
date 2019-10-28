@@ -20,8 +20,8 @@ export default class extends Component {
             Sign In
           </h1>
           <form action="/login" method="POST">
-            <input className="mb-12" type="email" name="username" placeholder="email"/>
-            <input className="mb-24" type="password" name="password" placeholder="password"/>
+            <input className="mb-12 lg-ips" type="email" name="username" placeholder="email"/>
+            <input className="mb-24 lg-ips" type="password" name="password" placeholder="password"/>
             <Link to='/dashboard'><button className="button float-right">Submit</button></Link>
           </form>
           <p className="inline-block">No account? <a style={{color: "#5D78FF"}} href="/register">Create one!</a></p>
