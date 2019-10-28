@@ -7,15 +7,16 @@ import btc_icon from "../../assets/img/icon/BTC_icon.png"
 import eth_icon from "../../assets/img/icon/ETH_icon.png"
 import document from "../../assets/img/icon/document.png"
 import miningcoin_symbol_1 from "../../assets/img/icon/miningcoin-symbol-1.png"
+import {Link} from 'react-router-dom'
 
 export default class extends Component {
   render() {
     return (
       <div>
         <div className="navbar absolute text-white flex flex-wrap pt-8">
-          <a href="/">
+          <Link to='/'>
             <img src={logo_dashboard} alt=""/>
-          </a>
+          </Link>
           <div className="logged-in-name">
             <div>
               Logged in as <span id="username">aaa@gmail.com</span> |&nbsp;
