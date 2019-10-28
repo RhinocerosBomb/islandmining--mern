@@ -18,13 +18,18 @@ router.get('/dashboard', isLoggedIn, async function (req, res) {
     User.findOne({ username: req.user.username }, (err, user) => {
         if (err) console.log('Error finding user:', err)
         res.json({
-            username            : user['username'],
-            verified            : user['verified'],
-            bitcoinAddress      : user['bitcoinAddress'],
-            ethereumAddress     : user['ethereumAddress'],
-            referrals           : user['referrals'],
-            referralAddress     : user['referralAddress'],
-            affiliatePermissions: user['affiliatePermissions']
+            data: [{
+                username            : user['username'],
+                bitcoinAddress      : user['bitcoinAddress'],
+                ethereumAddress     : user['ethereumAddress'],
+                referrals           : user['referrals'],
+                referralAddress     : user['referralAddress'],
+            }],
+            message: {},
+            status: {
+                verified: user['verified'],
+                affiliatePermissions: user['affiliatePermissions']   
+            }
         })
     })
 });
@@ -37,21 +42,20 @@ router.get('/kyc', isLoggedIn, function (req, res) {
         console.log(err);
     })
 
-
     User.findOne({ username: req.user.username }, (err, user) => {
         if (err) console.log(err);
 
         // Netverify account information
         var username = '';
         var password = '';
-        var options = {
+        const options = {
             url: 'https://netverify.com/api/v4/initiate',
             method: 'POST',
             json: true,
             body: {
                 "customerInternalReference": "JUMIOGENERATED",
                 "userReference": user.userIndex,
-                "callbackUrl": "https://www.islandmining.io/kyc/completed",
+                "callbackUrl": "https://www.islandmining.io/api/kyc/completed",
             },
             auth: {
                 user: username,
@@ -68,14 +72,11 @@ router.get('/kyc', isLoggedIn, function (req, res) {
         // then loads KYC page with registration link (redirectUrl)
         request(options, function (err, response, body) {
             if (!err && response.statusCode == 200) {
-                console.log({
-                    redirectUrl: body.redirectUrl,
-                    transactionReference: body.transactionReference,
-                    userReference: user.userIndex
-                });
+                res.json({
+                    redirectUrl: body.redirectUrl, 
+                    username: req.user.username 
+                })
 
-                // "Why render with verified url? "
-                res.render('kyc', { redirectUrl: body.redirectUrl, username: req.user.username, verified: user.verified })
             } else {
                 // Let the user know our app wasn't able to grab the registration link
                 console.log(err);
@@ -88,21 +89,22 @@ router.get('/kyc', isLoggedIn, function (req, res) {
 router.post('/kyc/completed', function (req, res) {
     if (req.body.verificationStatus !== 'NO_ID_UPLOADED' && req.body.verificationStatus !== 'ERROR_NOT_READABLE_ID') {
         User.findOneAndUpdate({ userIndex: req.body.customerId }, { verified: 'true' }, (err) => {
-            console.log(err);
+            if(err) console.log(err);
         })
     } else {
         User.findOneAndUpdate({ userIndex: req.body.customerId }, { verified: 'failed' }, (err) => {
-            console.log(err);
+            if (err) console.log(err);
         })
     }
-    console.log(req.body);
-    console.log('verificaiton status', req.body.verificationStatus);
 })
 
-router.post('/submitVerified', function (req, res) {
+router.post('/verify/user', function (req, res) {
     User.findOneAndUpdate({ username: req.body.username }, { verified: 'true' }, function (err) {
-        console.log(err);
-        res.redirect('/kyc');
+        if(err) console.log(err);
+    })
+
+    res.json({
+        username: req.body.username
     })
 })
 
@@ -113,15 +115,19 @@ router.post('/submitVerified', function (req, res) {
  * and verifies the address with Web3.
  * If it is a valid address, update user's Ethereum address
  */
-router.post('/verifyEthereum', function (req, res) {
+router.post('/verify/ethereum', function (req, res) {
     if (Web3.utils.isAddress(req.body.address) === true) {
         User.findOneAndUpdate({ username: req.body.username }, { ethereumAddress: req.body.address }, function (err) {
-            console.log(err);
+            if(err) console.log(err);
+        })
+
+        res.json({
+            username: req.body.username,
+            ethereumAddress: req.body.address
         })
     } else {
         res.send('not a valid address')
     }
-    res.redirect('/dashboard');
 })
 
 function isLoggedIn(req, res, next) {

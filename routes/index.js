@@ -11,6 +11,11 @@ router.get('/', function (req, res) {
         loggedIn = true;
         username = req.user.username
     }
+    res.json({
+        data: [{
+            
+        }]
+    })
     res.render('index', { username: username, loggedIn: loggedIn });
 });
 
@@ -51,11 +56,6 @@ router.post('/signup', (req, res) => {
         }
     });
 })
-
-// 404 Route
-router.get('*', function (req, res) {
-    res.render('404');
-});
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

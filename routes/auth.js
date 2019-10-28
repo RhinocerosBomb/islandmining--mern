@@ -6,21 +6,26 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user')
 const bjs = require('bitcoinjs-lib');
+const bip32 = require('bip32');
+const xpub = 'xpub6Ci3DHRbomXva9UT2ZFDWwxeUVqw8vox45ofZCDMk5tpA8cQeiExu8BVPYhYbx6chuquywSgXofiSTbLjL9YzvVUC7VEkayTw5igbCCnmky';
 
 router.get('/register', function (req, res) {
+    // If user is logged in, send them to the dashboard
+    // Else redirect user back to the register page
     if (req.isAuthenticated()) {
-        res.redirect('/dashboard');
+        res.json({ user: req.user })
     } else {
-        res.render('register');
+        res.json({ user: null })
     }
 });
 
+
 router.post('/register', async function (req, res) {
-    var userIndex = await User.count();
+    const userIndex = await User.count();
     ++userIndex;
 
-    // 
-    var { address } = bjs.payments.p2sh({
+    // Generate specific Bitcoin address from public key
+    const { address } = bjs.payments.p2sh({
         redeem: bjs.payments.p2wpkh({
             pubkey: bip32
                 .fromBase58(xpub)
@@ -29,6 +34,7 @@ router.post('/register', async function (req, res) {
         }),
     });
 
+    // Register user logic
     User.register(new User({
         username: req.body.username,
         bitcoinAddress: address,
@@ -36,52 +42,67 @@ router.post('/register', async function (req, res) {
         referralAddress: Math.floor((Math.random() * 1000000000) + 1)
     }), req.body.password, function (err, user) {
         if (err) {
-            console.log(err);
-            return res.render('register');
+            res.json({error: err.message})
         }
 
+        // Referral system logic. 
+        // Authenticate new user and send them to the dashboard page
+        // then check if they tried to refer themselves
         passport.authenticate('local')(req, res, function () {
-            if (req.user.referralAddress != req.body.referral) {
+
+            // Updates user if referral address is valid, updates user
+            if (req.user.referralAddress !== req.body.referral) {
                 User.findOneAndUpdate({ referralAddress: req.body.referral }, { $inc: { referrals: 1 } }, function (err) {
-                    console.log(err);
+                    if(err) console.log(err);
                 })
             } else {
                 res.send('Cannot enter your own referral address');
             }
-            res.redirect('/dashboard');
         });
+
+        // Loads user object on completion
+        res.json(user);
     });
 
 });
 
 // Login Routes
 router.get('/login', function (req, res) {
-    if (req.isAuthenticated())
-        res.redirect('/dashboard');
+    if (req.isAuthenticated()) {
+        res.json({ user: req.user })
+    } else {
+        res.json({ user: null })
+    }
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-}), function (req, res) { });
+router.post('/login', passport.authenticate('local'), (req, res) => {
+        console.log('logged in', req.user);
+        const userInfo = {
+            username: req.user.username
+        };
+        res.json(userInfo);
+    }
+)
 
-// Google login route
-router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile']
-}));
 
-router.get('/auth/google/redirect', function (req, res) {
-    res.redirect('/dashboard');
-})
+/**
+ * User logout logic.
+ * 
+ * When user logs out, destroy session and clear cookie.
+ * User will then be redirected to the login page
+ * with a message reminding them they have successfully
+ * logged out.
+ */
+router.post('/logout', function (req, res) {
+    if(req.user) {
+        req.session.destroy()
+        req.logout()
+        res.clearCookie('connect.sid', { path: '/' });
+        res.send({ msg: 'logging out' })
+    } else {
+        res.send({ msg: 'no user to log out' })
+    }
 
-// Logout route
-router.get('/logout', function (req, res) {
-    req.logout();
-    req.session.destroy(function (err) {
-        res.clearCookie('connect.sid');
-        if (err) console.log(err);
-        res.redirect('/login')
-    });
 })
 
 function isLoggedIn(req, res, next) {
