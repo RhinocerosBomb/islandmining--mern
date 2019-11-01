@@ -25,6 +25,12 @@ const CONNECTION_STRING = 'mongodb+srv://VictorHogrefe:Manowar2@cluster0-dbqcz.m
 // Connect to MongoAtlas database
 mongoose.connect(CONNECTION_STRING, { useNewUrlParser: true });
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, uid, token-type, client, access-token, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // App settings
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('express-session')({
