@@ -33,6 +33,13 @@ body .login-form {
     width: 100%;
     margin-top: 20px;
   }
+
+  .left-form {
+    width: calc(66.66%);
+  }
+  .right-form {
+    width: calc(33.33%);
+  }
   .term-container {
     margin-top: 20px;
     line-height: 25px;
@@ -115,7 +122,6 @@ body .login-form {
     padding: 25px 50px;
     position: absolute;
     background-color: white;
-    min-height: 484px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%)
@@ -126,7 +132,6 @@ body .login-form {
     /* Green */
     border: none;
     color: white;
-    padding: .5rem 10rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;

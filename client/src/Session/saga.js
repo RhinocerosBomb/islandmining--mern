@@ -5,14 +5,14 @@ import {fetchApi} from "../helpers/api";
 
 export function* login() {
   yield takeEvery(actions.LOGIN, function*({payload}) {
-    let response = yield call(fetchApi, 'post', 'devise/sign_in', payload)
+    let response = yield call(fetchApi, 'post', 'login', payload)
     if (response.data) {
       yield put({
         type: actions.LOGIN_SUCCESSFULLY,
         payload: response.data
       })
 
-      history.push('/items');
+      history.push('/dashboard');
     }
   })
 }
