@@ -1,7 +1,7 @@
-const apiUrl = 'http://localhost:3000/api/v1'
+const apiUrl = 'http://localhost:9000/api';
 
 const fetchApi = async(method, path, params={}) => {
-  let finalPath = path
+  let finalPath = path;
   let options = {
     method: method.toUpperCase(),
     headers: {

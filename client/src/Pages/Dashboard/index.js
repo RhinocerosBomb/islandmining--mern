@@ -1,4 +1,3 @@
-import "../../assets/css/tailwind.css"
 import "../../assets/css/dashboard.css"
 import './Dashboard.css';
 import React, {Component} from 'react';

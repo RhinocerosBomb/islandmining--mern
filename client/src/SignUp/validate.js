@@ -16,6 +16,11 @@ export const validate = (values) => {
   // validate password
   if (!values.password) {
     errors.password = 'Password is required'
+  } else {
+    const pwd = values.password.toString();
+    if(pwd.length < 8) {
+      errors.password = 'Password must consist of a minimum of 8 characters, with at least one special character and one uppercase letter.'
+    }
   }
   return errors;
 };

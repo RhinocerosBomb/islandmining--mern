@@ -1,6 +1,6 @@
 import './login.css';
 import "../../assets/css/tailwind.css"
-import "../../assets/css/login.css"
+import "../../assets/css/login.scss"
 import im_logo_mail_sm from "../../assets/media/im_logo_mail_sm.png"
 import {Link} from 'react-router-dom'
 import React, {Component} from 'react';

@@ -3,10 +3,10 @@ const actions = {
   RESET_SIGN_UP_FORM: 'RESET_SIGN_UP_FORM',
   SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
 
-  signUp: (email, password) => {
+  signUp: (username, password) => {
     return  {
       type: actions.SIGN_UP,
-      payload: {email, password}
+      payload: {username, password}
     }
   },
   closeSuccessMessage: () => {

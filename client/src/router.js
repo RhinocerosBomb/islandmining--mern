@@ -38,7 +38,7 @@ const PublicRoutes = ({history, isLoggedIn}) => {
           />
           <Route
             exact
-            path={"/signup"}
+            path={"/register"}
             component={asyncComponent(() => import("./Pages/SignUp"))}
           />
           <Route

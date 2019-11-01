@@ -1,5 +1,5 @@
 import './app.css';
-
+import "../assets/css/tailwind.css"
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import {store, history} from '../redux/store';

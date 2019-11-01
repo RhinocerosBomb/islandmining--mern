@@ -40,9 +40,12 @@
 }
 
 span.error {
-  color: red;
-  margin-top: 5px;
-  font-size: 12px;
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 15px;
+  margin-top: 10px;
+  font-size: 10px;
+  font-style: italic;
 }
 
 .roadmap {
@@ -56,6 +59,10 @@ span.error {
   right: 0;
   height: 30px;
   background-image: linear-gradient(to bottom, #2c1d6233, #eeeeeeff);
+}
+
+body {
+  font-family: 'europa', sans-serif;
 }
 
 .main-footer {
@@ -79,4 +86,13 @@ span.error {
 
 .main-footer a {
   color: white !important;
+}
+
+input {
+  display: block;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .5);
+  width: 100%;
+  background-image: none !important;
 }
