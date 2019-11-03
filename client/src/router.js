@@ -1,11 +1,7 @@
 import React from "react";
 import {Route, Redirect, Router, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import App from "./App";
 import asyncComponent from "./helpers/AsyncFunc";
-import Header from './Layout/Header'
-import Body from './Layout/Body'
-import Footer from './Layout/Footer'
 
 const RestrictedRoute = ({component: Component, isLoggedIn, ...rest}) => (
   <Route
@@ -28,8 +24,6 @@ const PublicRoutes = ({history, isLoggedIn}) => {
   return (
     <Router history={history}>
       <div>
-        <Header/>
-        <Body>
         <Switch>
           <Route
             exact
@@ -38,13 +32,28 @@ const PublicRoutes = ({history, isLoggedIn}) => {
           />
           <Route
             exact
+            path={"/1"}
+            component={asyncComponent(() => import("./Pages1/Home"))}
+          />
+          <Route
+            exact
             path={"/register"}
             component={asyncComponent(() => import("./Pages/SignUp"))}
           />
           <Route
             exact
+            path={"/register1"}
+            component={asyncComponent(() => import("./Pages1/SignUp"))}
+          />
+          <Route
+            exact
             path={"/login"}
             component={asyncComponent(() => import("./Pages/Login"))}
+          />
+          <Route
+            exact
+            path={"/login1"}
+            component={asyncComponent(() => import("./Pages1/Login"))}
           />
           <RestrictedRoute
             path="/dashboard"
@@ -52,8 +61,6 @@ const PublicRoutes = ({history, isLoggedIn}) => {
             isLoggedIn={isLoggedIn}
           />
         </Switch>
-        </Body>
-        <Footer/>
       </div>
     </Router>
   );
