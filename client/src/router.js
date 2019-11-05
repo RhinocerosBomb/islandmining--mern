@@ -1,9 +1,13 @@
-import React from "react";
-import {Route, Redirect, Router, Switch} from "react-router-dom";
-import {connect} from "react-redux";
-import asyncComponent from "./helpers/AsyncFunc";
+import React from 'react';
+import { Route, Redirect, Router, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import asyncComponent from './helpers/AsyncFunc';
 
-const RestrictedRoute = ({component: Component, isLoggedIn, ...rest}) => (
+const RestrictedRouteWhenLoggedOut = ({
+  component: Component,
+  isLoggedIn,
+  ...rest
+}) => (
   <Route
     {...rest}
     render={props =>
@@ -12,52 +16,62 @@ const RestrictedRoute = ({component: Component, isLoggedIn, ...rest}) => (
       ) : (
         <Redirect
           to={{
-            pathname: "/login",
-            state: {from: props.location}
+            pathname: '/login',
+            state: { from: props.location }
           }}
         />
       )
     }
   />
 );
-const PublicRoutes = ({history, isLoggedIn}) => {
+
+const RestrictedRouteWhenLoggedIn = ({
+  component: Component,
+  isLoggedIn,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={props =>
+      !isLoggedIn ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/dashboard',
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
+
+const PublicRoutes = ({ history, isLoggedIn }) => {
   return (
     <Router history={history}>
       <div>
         <Switch>
           <Route
             exact
-            path={"/"}
-            component={asyncComponent(() => import("./Pages/Home"))}
+            path={'/'}
+            component={asyncComponent(() => import('./Pages/Home'))}
           />
-          <Route
+          <RestrictedRouteWhenLoggedIn
             exact
-            path={"/1"}
-            component={asyncComponent(() => import("./Pages1/Home"))}
+            path={'/register'}
+            isLoggedIn={isLoggedIn}
+            component={asyncComponent(() => import('./Pages/SignUp'))}
           />
-          <Route
+          <RestrictedRouteWhenLoggedIn
             exact
-            path={"/register"}
-            component={asyncComponent(() => import("./Pages/SignUp"))}
+            path={'/login'}
+            isLoggedIn={isLoggedIn}
+            component={asyncComponent(() => import('./Pages/Login'))}
           />
-          <Route
-            exact
-            path={"/register1"}
-            component={asyncComponent(() => import("./Pages1/SignUp"))}
-          />
-          <Route
-            exact
-            path={"/login"}
-            component={asyncComponent(() => import("./Pages/Login"))}
-          />
-          <Route
-            exact
-            path={"/login1"}
-            component={asyncComponent(() => import("./Pages1/Login"))}
-          />
-          <RestrictedRoute
+          <RestrictedRouteWhenLoggedOut
             path="/dashboard"
-            component={asyncComponent(() => import("./Pages/Dashboard"))}
+            component={asyncComponent(() => import('./Pages/Dashboard'))}
             isLoggedIn={isLoggedIn}
           />
         </Switch>
@@ -66,5 +80,4 @@ const PublicRoutes = ({history, isLoggedIn}) => {
   );
 };
 
-export default connect(state => ({
-}))(PublicRoutes);
+export default connect(state => ({}))(PublicRoutes);

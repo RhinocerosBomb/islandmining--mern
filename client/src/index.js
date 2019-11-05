@@ -2,11 +2,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App/index';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const env = {
-  network: process.env.REACT_APP_ETH_NETWORK || 'development', // Default to Ganache CLI
+  network: process.env.REACT_APP_ETH_NETWORK || 'development' // Default to Ganache CLI
 };
 
 ReactDOM.render(<App {...env} />, document.getElementById('root'));

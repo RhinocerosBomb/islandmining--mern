@@ -1,5 +1,5 @@
 import { all, takeEvery, put, call, fork } from 'redux-saga/effects';
-import actions from './actions';
+import actions from '../actions/SignUpActions';
 import { fetchApi } from '../helpers/api';
 
 export function* signUp() {

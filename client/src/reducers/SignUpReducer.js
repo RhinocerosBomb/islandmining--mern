@@ -1,12 +1,10 @@
-import actions from './actions';
+import actions from '../actions/SignUpActions';
 
 const initState = {
   success: false
 };
 
 export default function appReducer(state = initState, action) {
-  console.log(state);
-
   switch (action.type) {
     case actions.SIGN_UP_SUCCESS:
       return { ...state, success: true };

@@ -59,7 +59,7 @@ const setToken = (token, client, uid) => {
 };
 
 const isLoggedIn = () => {
-  return true;
+  return false;
   return !!localStorage.getItem('pw_token');
 };
 
