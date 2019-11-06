@@ -1,5 +1,5 @@
-import {Link} from 'react-router-dom'
-import React, {useEffect} from 'react';
+import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -17,21 +17,26 @@ import '../../assets/vendors/themes/seo.css';
 import './home.css';
 
 export default function() {
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
-    <div data-mobile-nav-trigger-alignment="right" data-mobile-nav-align="left" data-mobile-nav-style="modern"
-         data-mobile-nav-shceme="gray" data-mobile-header-scheme="gray" data-mobile-nav-breakpoint="1199">
+    <div
+      data-mobile-nav-trigger-alignment="right"
+      data-mobile-nav-align="left"
+      data-mobile-nav-style="modern"
+      data-mobile-nav-shceme="gray"
+      data-mobile-header-scheme="gray"
+      data-mobile-nav-breakpoint="1199"
+    >
       <div id="wrap">
-        <Header/>
-        <Body/>
+        <Header />
+        <Body />
+        <NavBar />
+        <TokenOfferingDetails />
+        <Roadmap />
+        <Team />
+        <Footer />
       </div>
-      <NavBar />
-      <TokenOfferingDetails />
-      <Roadmap />
-      <Team />
-      <Footer/>
     </div>
   );
 }

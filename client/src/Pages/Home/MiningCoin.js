@@ -6,7 +6,6 @@ import whitepaper_sct from '../../assets/media/whitepaper-sct.jpg';
 import whitepaper_2nd from '../../assets/media/whitepaper-2nd.jpg';
 import bg76 from '../../assets/demo/bg/bg-76.svg';
 function MiningCoin() {
-  console.log(bg76);
   return (
     <section
       className="vc_row bg-no-repeat pt-10 pb-150"
