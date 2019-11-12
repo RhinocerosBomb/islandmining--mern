@@ -4,6 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import "./vendors/_metronic/_assets/plugins/line-awesome/css/line-awesome.css";
+import "./vendors/_metronic/_assets/plugins/flaticon/flaticon.css";
+import "./vendors/_metronic/_assets/plugins/flaticon2/flaticon.css";
 
 const env = {
   network: process.env.REACT_APP_ETH_NETWORK || 'development' // Default to Ganache CLI

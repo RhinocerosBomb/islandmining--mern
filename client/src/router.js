@@ -58,16 +58,9 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
             component={asyncComponent(() => import('./Pages/Home'))}
           />
           <RestrictedRouteWhenLoggedIn
-            exact
-            path={'/register'}
+            path={'/auth'}
             isLoggedIn={isLoggedIn}
-            component={asyncComponent(() => import('./Pages/SignUp'))}
-          />
-          <RestrictedRouteWhenLoggedIn
-            exact
-            path={'/login'}
-            isLoggedIn={isLoggedIn}
-            component={asyncComponent(() => import('./Pages/Login'))}
+            component={asyncComponent(() => import('./Pages/Auth/Auth'))}
           />
           <RestrictedRouteWhenLoggedOut
             path="/dashboard"
