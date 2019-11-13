@@ -50,7 +50,6 @@ const RestrictedRouteWhenLoggedIn = ({
 const PublicRoutes = ({ history, isLoggedIn }) => {
   return (
     <Router history={history}>
-      <div>
         <Switch>
           <Route
             exact
@@ -68,7 +67,6 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
             isLoggedIn={isLoggedIn}
           />
         </Switch>
-      </div>
     </Router>
   );
 };
