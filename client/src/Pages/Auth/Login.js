@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import {login} from '../../actions/AuthActions';
 // import { FormattedMessage, injectIntl } from "react-intl";
 import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 
 function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingButtonStyle, setLoadingButtonStyle] = useState({
     paddingRight: "2.5rem"
   });
+
+  const dispatch = useDispatch();
 
   const enableLoading = () => {
     setLoading(true);
@@ -22,11 +23,6 @@ function Login(props) {
   const disableLoading = () => {
     setLoading(false);
     setLoadingButtonStyle({ paddingRight: "2.5rem" });
-  };
-
-
-  const login = ({ username, password }) => {
-    props.login(username, password);
   };
 
   return (
@@ -76,16 +72,16 @@ function Login(props) {
             onSubmit={(values, { setStatus, setSubmitting }) => {
               enableLoading();
               setTimeout(() => {
-                login(values.email, values.password)
-                  .then(({ data: { accessToken } }) => {
-                    disableLoading();
-                    props.login(accessToken);
-                  })
-                  .catch(() => {
-                    disableLoading();
-                    setSubmitting(false);
-                    setStatus("login failed");
-                  });
+                // login(values.email, values.password)
+                //   .then(({ data: { accessToken } }) => {
+                //     disableLoading();
+                //     props.login(accessToken);
+                //   })
+                //   .catch(() => {
+                //     disableLoading();
+                //     setSubmitting(false);
+                //     setStatus("login failed");
+                //   });
               }, 1000);
             }}
           >
@@ -202,13 +198,8 @@ function Login(props) {
   );
 }
 
-export default Login;
-
 // const mapStateToProps = state => ({
 //   success: state.sessionReducer.success
 // });
 
-// export default connect(
-//   mapStateToProps,
-//   { login }
-// )(Login);
+export default Login;

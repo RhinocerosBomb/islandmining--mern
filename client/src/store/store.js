@@ -2,8 +2,9 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import {createBrowserHistory as createHistory} from 'history';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from './reducers';
-import rootSaga from './sagas';
+import { persistStore } from "redux-persist";
+
+import { rootReducer, rootSaga } from "./rootDuck";
 import { createLogger } from 'redux-logger';
 
 const history = createHistory();
@@ -20,11 +21,13 @@ const composeEnhancers =
 
 const store = createStore(
   combineReducers({
-    ...reducers,
+    rootReducer,
     router: routerReducer
   }),
   composeEnhancers(applyMiddleware(...middlewares, createLogger()))
 );
+
+export const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 export { store, history };

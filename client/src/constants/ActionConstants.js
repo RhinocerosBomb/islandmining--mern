@@ -1,0 +1,4 @@
+export const LOGIN = "LOGIN"
+export const LOGIN_SUCCESSFULLY = "LOGIN_SUCCESSFULLY"
+export const REGISTER = "REGISTER"
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS"

@@ -86,14 +86,14 @@ function Header() {
               </div>
               <div className="col text-right">
                 <div className="header-module">
-                  <Link to="/login" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
+                  <Link to="/auth/login" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
                     <span>
                       <span className="btn-txt">Log In</span>
                     </span>
                   </Link>
                 </div>
                 <div className="header-module">
-                  <Link to="/register" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
+                  <Link to="/auth/register" className="btn btn-default text-uppercase btn-sm circle btn-bordered border-thin px-2">
                     <span>
                       <span className="btn-txt">Sign Up</span>
                     </span>

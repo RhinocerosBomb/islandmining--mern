@@ -58,12 +58,12 @@ function NavBar() {
             </a>
           </li>
           <li className="desktop-hidden">
-            <a href="/login" data-localscroll="true">
+            <a href="/auth/login" data-localscroll="true">
               <span className="txt">Log In</span>
             </a>
           </li>
           <li className="desktop-hidden">
-            <a href="/register" data-localscroll="true">
+            <a href="/auth/register" data-localscroll="true">
               <span className="txt">Sign Up</span>
             </a>
           </li>
