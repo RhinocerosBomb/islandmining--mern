@@ -1,13 +1,14 @@
-import React from "react";
-import { Formik } from "formik";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import { FormattedMessage, injectIntl } from "react-intl";
-import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
-// import * as auth from "../../store/ducks/auth.duck";
-// import { register } from "../../crud/auth.crud";
+import { Checkbox, FormControlLabel, TextField } from '@material-ui/core';
+import { actions } from '../../store/ducks/auth.duck';
+import { register } from '../../crud/auth.crud';
 
 function Registration(props) {
+  const dispatch = useDispatch();
   // const { intl } = props;
 
   return (
@@ -22,12 +23,11 @@ function Registration(props) {
 
         <Formik
           initialValues={{
-            email: "",
-            fullname: "",
-            username: "",
-            password: "",
+            email: '',
+            password: '',
             acceptTerms: false,
-            confirmPassword: ""
+            confirmPassword: '',
+            referral: ''
           }}
           validate={values => {
             const errors = {};
@@ -40,30 +40,46 @@ function Registration(props) {
               errors.email = 'Invalid email';
             }
 
-            if (!values.fullname) {
-              errors.fullname = 'Field Required';
-            }
+            // if (!values.fullname) {
+            //   errors.fullname = 'Field Required';
+            // }
 
-            if (!values.username) {
-              errors.username = 'Invalid username';
-            }
+            // if (!values.username) {
+            //   errors.username = 'Invalid username';
+            // }
 
             if (!values.password) {
-              errors.password = 'Field Required'
+              errors.password = 'Field Required';
             }
 
             if (!values.confirmPassword) {
-              errors.confirmPassword = 'Field Required'
+              errors.confirmPassword = 'Field Required';
             } else if (values.password !== values.confirmPassword) {
               errors.confirmPassword =
                 "Password and Confirm Password didn't match.";
             }
 
-            if (!values.acceptTerms) {
-              errors.acceptTerms = "Accept Terms";
-            }
+            // if (!values.acceptTerms) {
+            //   errors.acceptTerms = "Accept Terms";
+            // }
 
             return errors;
+          }}
+          onSubmit={(values, { setStatus, setSubmitting }) => {
+            register(values.email, values.password, values.referral)
+              .then(({ data: { accessToken } }) => {
+                dispatch(actions.register(accessToken));
+              })
+              .catch(err => {
+                console.log(err);
+                setSubmitting(false);
+                if (
+                  err.response.status === 400 ||
+                  err.response.status === 500
+                ) {
+                  setStatus(err.response.data.message);
+                }
+              });
           }}
         >
           {({
@@ -85,20 +101,6 @@ function Registration(props) {
 
               <div className="form-group mb-0">
                 <TextField
-                  margin="normal"
-                  label="Fullname"
-                  className="kt-width-full"
-                  name="fullname"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.fullname}
-                  helperText={touched.fullname && errors.fullname}
-                  error={Boolean(touched.fullname && errors.fullname)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
                   label="Email"
                   margin="normal"
                   className="kt-width-full"
@@ -108,20 +110,6 @@ function Registration(props) {
                   value={values.email}
                   helperText={touched.email && errors.email}
                   error={Boolean(touched.email && errors.email)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
-                  margin="normal"
-                  label="Username"
-                  className="kt-width-full"
-                  name="username"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.username}
-                  helperText={touched.username && errors.username}
-                  error={Boolean(touched.username && errors.username)}
                 />
               </div>
 
@@ -140,7 +128,7 @@ function Registration(props) {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-0">
                 <TextField
                   type="password"
                   margin="normal"
@@ -157,29 +145,17 @@ function Registration(props) {
                 />
               </div>
 
-              <div className="form-group mb-0">
-                <FormControlLabel
-                  label={
-                    <>
-                      I agree the{" "}
-                      <Link
-                        to="/terms"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Terms & Conditions
-                      </Link>
-                    </>
-                  }
-                  control={
-                    <Checkbox
-                      color="primary"
-                      name="acceptTerms"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      checked={values.acceptTerms}
-                    />
-                  }
+              <div className="form-group">
+                <TextField
+                  margin="normal"
+                  label="Referral Code"
+                  className="kt-width-full"
+                  name="referral"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.referral}
+                  helperText={touched.referral && errors.referral}
+                  error={Boolean(touched.referral && errors.referral)}
                 />
               </div>
 
@@ -192,13 +168,16 @@ function Registration(props) {
                 </Link>
 
                 <Link to="/auth">
-                  <button type="button" className="btn btn-secondary btn-elevate kt-login__btn-secondary">
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-elevate kt-login__btn-secondary"
+                  >
                     Back
                   </button>
                 </Link>
 
                 <button
-                  disabled={isSubmitting || !values.acceptTerms}
+                  disabled={isSubmitting}
                   className="btn btn-primary btn-elevate kt-login__btn-primary"
                 >
                   Submit

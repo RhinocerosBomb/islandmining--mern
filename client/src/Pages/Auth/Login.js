@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import { connect, useDispatch } from "react-redux";
-import {login} from '../../actions/AuthActions';
-// import { FormattedMessage, injectIntl } from "react-intl";
-import { TextField } from "@material-ui/core";
-import clsx from "clsx";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../store/ducks/auth.duck';
+import { login } from '../../crud/auth.crud';
+import { TextField } from '@material-ui/core';
+import clsx from 'clsx';
 
 function Login(props) {
   const [loading, setLoading] = useState(false);
   const [loadingButtonStyle, setLoadingButtonStyle] = useState({
-    paddingRight: "2.5rem"
+    paddingRight: '2.5rem'
   });
 
   const dispatch = useDispatch();
 
   const enableLoading = () => {
     setLoading(true);
-    setLoadingButtonStyle({ paddingRight: "3.5rem" });
+    setLoadingButtonStyle({ paddingRight: '3.5rem' });
   };
 
   const disableLoading = () => {
     setLoading(false);
-    setLoadingButtonStyle({ paddingRight: "2.5rem" });
+    setLoadingButtonStyle({ paddingRight: '2.5rem' });
   };
 
   return (
@@ -48,23 +48,23 @@ function Login(props) {
 
           <Formik
             initialValues={{
-              email: "admin@demo.com",
-              password: "demo"
+              email: '',
+              password: ''
             }}
             validate={values => {
               const errors = {};
 
               if (!values.email) {
                 // https://github.com/formatjs/react-intl/blob/master/docs/API.md#injection-api
-                errors.email = "validation required";
+                errors.email = 'validation required';
               } else if (
                 !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
               ) {
-                errors.email = "Invalid Field";
+                errors.email = 'Invalid Field';
               }
 
               if (!values.password) {
-                errors.password = "required Field"
+                errors.password = 'required Field';
               }
 
               return errors;
@@ -72,16 +72,16 @@ function Login(props) {
             onSubmit={(values, { setStatus, setSubmitting }) => {
               enableLoading();
               setTimeout(() => {
-                // login(values.email, values.password)
-                //   .then(({ data: { accessToken } }) => {
-                //     disableLoading();
-                //     props.login(accessToken);
-                //   })
-                //   .catch(() => {
-                //     disableLoading();
-                //     setSubmitting(false);
-                //     setStatus("login failed");
-                //   });
+                login(values.email, values.password)
+                  .then(({ data: { accessToken } }) => {
+                    disableLoading();
+                    dispatch(actions.login(accessToken));
+                  })
+                  .catch(err => {
+                    disableLoading();
+                    setSubmitting(false);
+                    setStatus('login failed');
+                  });
               }, 1000);
             }}
           >
@@ -108,7 +108,7 @@ function Login(props) {
                 ) : (
                   <div role="alert" className="alert alert-info">
                     <div className="alert-text">
-                      Use account <strong>admin@demo.com</strong> and password{" "}
+                      Use account <strong>admin@demo.com</strong> and password{' '}
                       <strong>demo</strong> to continue.
                     </div>
                   </div>
@@ -158,7 +158,7 @@ function Login(props) {
                     disabled={isSubmitting}
                     className={`btn btn-primary btn-elevate kt-login__btn-primary ${clsx(
                       {
-                        "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading
+                        'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading
                       }
                     )}`}
                     style={loadingButtonStyle}

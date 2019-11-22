@@ -1,6 +1,9 @@
 import '../../assets/css/dashboard.css';
 import './Dashboard.css';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions as userActions } from '../../store/ducks/auth.duck';
+import { actions as dashboardActions } from '../../store/ducks/dashboard.duck';
 import { Link } from 'react-router-dom';
 import logo_dashboard from '../../assets/img/logo/logo_dashboard.png';
 import btc_icon from '../../assets/img/icon/BTC_icon.png';
@@ -8,7 +11,47 @@ import eth_icon from '../../assets/img/icon/ETH_icon.png';
 import document from '../../assets/img/icon/document.png';
 import miningcoin_symbol_1 from '../../assets/img/icon/miningcoin-symbol-1.png';
 
+const getCurrentTime = () => {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  let period;
+  if (hours > 12) {
+    period = 'PM';
+  } else {
+    period = 'AM';
+  }
+
+  const toString = () => `${hours}:${minutes} ${period}`;
+
+  return { hours, minutes, period, toString };
+};
+
 function Dashboard() {
+  const [timer, setTimer] = useState(getCurrentTime());
+  const {
+    auth: { user },
+    dashboard
+  } = useSelector(state => state.rootReducer);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(userActions.logout());
+  };
+  console.log(user);
+  useEffect(() => {
+    const clock = setInterval(() => {
+      const nowDate = getCurrentTime();
+      if (nowDate.minutes > timer.minutes) {
+        setTimer(nowDate);
+      }
+    }, 1000);
+
+    dispatch(dashboardActions.dashboard());
+
+    return () => clearInterval(clock);
+  }, [dispatch]);
+
   return (
     <div>
       <div className="navbar absolute text-white flex flex-wrap pt-8">
@@ -17,8 +60,8 @@ function Dashboard() {
         </Link>
         <div className="logged-in-name">
           <div>
-            Logged in as <span id="username">aaa@gmail.com</span> |&nbsp;
-            <form style={{ display: 'inline' }} action="/logout" method="POST">
+            Logged in as <span id="username">{user.username}</span> |&nbsp;
+            <form style={{ display: 'inline' }} onSubmit={logout}>
               <input
                 style={{ backgroundColor: 'transparent', cursor: 'pointer' }}
                 type="submit"
@@ -38,21 +81,21 @@ function Dashboard() {
         </h3>
         <h3 className="pl-4">
           Current Conversion Rates&nbsp;
-          <em>(Updated Oct 24, 2019 12:00:00 UTC)</em>
+          <em>{dashboard.cryptoPrice.dateTime}</em>
         </h3>
         <div className="pl-4 flex flex-wrap">
           <div style={{ color: '#2185D0' }}>
             <img className="crypto_icon" src={btc_icon} alt="" />
             <strong>BTC</strong> $
             <span className="" id="BTC-price">
-              9668.64
+              {dashboard.cryptoPrice.BTCUSDT}
             </span>
           </div>
           <div className="pl-8" style={{ color: '#2185D0' }}>
             <img className="crypto_icon" src={eth_icon} alt="" />
             <strong>ETH</strong> $
             <span className="" id="ETH-price">
-              186.44
+              {dashboard.cryptoPrice.ETHUSDT}
             </span>
           </div>
         </div>
@@ -65,7 +108,7 @@ function Dashboard() {
             Official Time:&nbsp;
           </h3>
           <span id="official-time" style={{ color: '#716ACA' }}>
-            12:00 AM
+            {timer.toString()}
           </span>
         </div>
       </div>
@@ -208,7 +251,6 @@ function Dashboard() {
               <a
                 id="registration-btn"
                 href="https://islandmining.netverify.com/web/v4/app?authorizationToken=eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAB3MPQvCMBCA4f9ycw-a5JpLuhUapYIVShUc83GZOzgo4n-3ur48vG-Q5_CAXnWstVMtd55VA3Eq0AM7a4tvGY1QRopOMIpRmMgKJ0ttjgYayIvUXZ-u5-lyDHNYhjWMv_6fpOqyKzZhNeSQlNcYWQh9V2upmkkVu-NtfW27nsN6C8t0uMPnCwkJqy6bAAAA.Uo5pd1_Ke-XO2agexiS5aDiirEtqi7guxfVgnW7_AsWO5-r9S0bb60fNKJ_-6zVEBrKE7YZHbOqJxkQa-ckKew&amp;locale=en-US"
-                target="_blank"
                 className="signup_icomply text-center py-8 mx-auto"
               >
                 <h2 className="heading-secondary">Begin KYC Registration</h2>
